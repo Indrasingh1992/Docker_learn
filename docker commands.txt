@@ -211,6 +211,66 @@ check all the files
 
 
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+#Docker Volume
+
+
+#create a file and dockerfile
+touch file1 file2 Dockerfile
+
+
+#edit docker file:
+vi Dockerfile
+
+
+#enter the commmand  in docker file:
+FROM Ubuntu
+VOLUME [/"myvolume"]
+
+press esc
+:wq enter
+
+
+
+#create image from file 
+docker build -t myimage .
+
+
+
+#check docker images:
+docker images
+
+
+
+#create container from myimage:
+docker run -it --name contatiner newimage /bin/bash
+
+
+
+
+#create file inside myvolume then exit from  contianer
+touch filex filey filez
+exit
+
+
+
+
+#creates a new container named container2 from the Ubuntu image, runs in privileged mode, granting it more permissions.It shares volumes with an existing container (contatiner)
+After starting the container, it drops you into an interactive bash shell within the Ubuntu environment of the container.
+
+docker run -it --name container2 --privileged=true --volumes-from contatiner ubuntu /bin/bash
+
+
+
+
+#create volume using command 
+docker run -it --name contatiner3 -v /volume2 ubuntu /bin/bash
+
+
+
+#same as above shares volumes with an existing container(container3) and creating new container (container4) 
+docker run -it --name container4 --privileged=true --volumes-from contatiner3 ubuntu /bin/bash
+
 
 
 
