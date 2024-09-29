@@ -273,6 +273,35 @@ docker run -it --name container4 --privileged=true --volumes-from contatiner3 ub
 
 
 
+#Map host volume to container
+docker run -it --name hostcont -v /home/azureuser:/sonu --privileged=true --volumes-from contatiner3 ubuntu /bin/bash
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Port Mapping (request made on local(host) forwarded to port on container)
+
+docker run -td --name techserver -p 80:80 ubuntu
+
+#The command creates and starts a new Docker container called techserver in the background, using the official ubuntu image. It allocates a terminal (-t), runs in detached mode (-d), and maps port 80 on the host to port 80 inside the container (-p 80:80). This setup is typically used to run a web server or another service that listens on port 80.
+
+
+
+example
+
+apt-get install apache2 -y
+cd /var/www/html
+echo "subscribe indra technical">index.html
+service apache2 restart 
+
+# check public ip with port :80 we will get the out put as "subscribe indra technical".  Note inbound rule should be set for port 80.
+
+
+
+
+docker run -td --name myjenkins -p 8080:8080 jenkins/jenkins:lts
+# this command runs Jenkins in a detached Docker container, names it myjenkins, and makes Jenkins accessible via port 8080 on your machine.  Note inbound rule should be set for port 8080.
 
 
 
